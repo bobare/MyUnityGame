@@ -77,14 +77,10 @@ public class Bird : MonoBehaviour {
 	}
 	public void EndScene ()
 	{
-		//Deactivate object
 		gameObject.SetActive (false);
-		//display the texts
 		end.text = count.ToString ();
 		fin.text = "YOUR SCORE";
-		//Stop the time
 		Time.timeScale = 0;
-		//Load Scene
 		SceneManager.LoadScene ("scene");
 	}
 

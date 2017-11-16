@@ -16,8 +16,9 @@ public class Bird : MonoBehaviour {
 	public float groundSpawnTime = 18f;
 	// Display of counted points
 	public Text countText;
-	// Temporary counting points storage
+	// Final counting points storage
 	private int count;
+	// Display Pause
 	public Text Escape;
 	public Text end;
 	public Text fin;
@@ -38,24 +39,35 @@ public class Bird : MonoBehaviour {
 		SetCountText ();
 		Escape.text = "";
 		fin.text = "";
-		//call the Spawn function after a delay of spawnTime 
-		//	and then continue to call after the same amount of time
+		/*call the Spawn function after a delay of spawnTime 
+		and then continue to call after the same amount of time*/
 		InvokeRepeating ("Spawn", spawnTime, spawnTime);
+		/*call the GroundSpawn function after a delay of GroundSpawnTime 
+		and then continue to call after the same amount of time*/
 		InvokeRepeating ("GroundSpawn", groundSpawnTime, groundSpawnTime);
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		//check if input is a spceabar or a click
 		if ((Input.GetKeyDown(KeyCode.Space)) || (Input.GetMouseButtonDown(0)))
+			//if true add a force
 			GetComponent<Rigidbody2D> ().AddForce (Vector2.up * force);
+		//check if input is escape key
 		if (Input.GetKeyDown (KeyCode.Escape)) 
 		{
+			//if true check if time is running
 			if (Time.timeScale == 1) {
+				//if time is running, stop time
 				Time.timeScale = 0;
+				//display PAUSE
 				Escape.text = "PAUSE";
+				//if time is not running
 			} else if (Time.timeScale == 0) 
 			{
+				//resume time
 				Time.timeScale = 1;
+				//remove the PAUSE display
 				Escape.text = "";
 			}
 		}
